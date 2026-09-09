@@ -1,31 +1,37 @@
 class UpdateComponent extends Component {
-    position
+    timeSinceLastLaser
 
     start() {
-        this.position = new Vector2(50, 50)
+        this.timeSinceLastLaser = 0
     }
 
     update() {
+        this.timeSinceLastLaser += 1
 
         // Movement
         if (Input.keysDown.includes("ArrowLeft")) {
             // Go left
-            this.position.x = this.position.x - 2
+            this.transform.position.x = this.transform.position.x - 2
         }
         
         if (Input.keysDown.includes("ArrowRight")) {
             // Go right
-            this.position.x = this.position.x + 2
+            this.transform.position.x = this.transform.position.x + 2
         }
         
         if (Input.keysDown.includes("ArrowUp")) {
             // Go up
-            this.position.y = this.position.y - 2
+            this.transform.position.y = this.transform.position.y - 2
         }
         
         if (Input.keysDown.includes("ArrowDown")) {
             // Go down
-            this.position.y = this.position.y + 2
+            this.transform.position.y = this.transform.position.y + 2
+        }
+
+        if (this.timeSinceLastLaser > 2) {
+            this.timeSinceLastLaser = 0
+            instantiate(new LaserGameObject(), this.transform.position.clone())
         }
     }
 }
