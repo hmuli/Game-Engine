@@ -2,6 +2,6 @@ class Component {
     gameObject
 
     get transform() {
-        return this.gameObject.transform()
+        return this.gameObject.transform
     }
 }

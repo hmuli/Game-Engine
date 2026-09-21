@@ -25,6 +25,8 @@ class Engine {
         Engine.update()
         Engine.draw()
 
+        Time.update()
+
         // Run the game loop when possible
         requestAnimationFrame(Engine.gameLoop)
     }

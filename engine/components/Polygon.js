@@ -4,11 +4,13 @@ class Polygon extends Component {
     points = []
 
     draw(ctx) {
-        let position = this.transform().position
+        let position = this.transform.position
 
         ctx.save()
 
         ctx.translate(position.x, position.y)
+        ctx.scale(this.transform.scale.x, this.transform.scale.y)
+        ctx.rotate(this.transform.rotation)
 
         ctx.beginPath()
         for(const point of this.points) {

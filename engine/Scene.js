@@ -1,9 +1,10 @@
 class Scene {
     gameObjects = []
 
-    instantiate(gameObject, position = new Vector2(0, 0)) {
+    instantiate(gameObject, position = new Vector2(0, 0), rotation) {
         this.gameObjects.push(gameObject)
         gameObject.transform.position = position
+        gameObject.transform.rotation = rotation
     }
 
     start() {
@@ -25,6 +26,6 @@ class Scene {
     }
 }
 
-function instantiate(gameObject, position = new Vector2(0, 0)) {
-    Engine.currentScene.instantiate(gameObject, position)
+function instantiate(gameObject, position = new Vector2(0, 0), rotation = 0) {
+    Engine.currentScene.instantiate(gameObject, position, rotation)
 }
