@@ -3,18 +3,21 @@ class PlayerCharacter extends Component {
     draw(ctx) {
         let position = this.transform.position
         let scale = this.transform.scale
+        let size = 80
+
+        // console.log(this.gameObject.getComponent(PlayerController).runDirection)
 
         ctx.save()
 
-        ctx.translate(position.x, position.y)
+        ctx.translate(position.x - size / 2, position.y + size / 2)
         ctx.scale(scale.x, scale.y)
 
         // Body
         ctx.beginPath()
         ctx.lineTo(0, 0)
-        ctx.lineTo(0, 80)
-        ctx.lineTo(80, 80)
-        ctx.lineTo(80, 0)
+        ctx.lineTo(0, size)
+        ctx.lineTo(size, size)
+        ctx.lineTo(size, 0)
 
         ctx.fillStyle = "rgb(0, 80, 255)"
         ctx.fill()

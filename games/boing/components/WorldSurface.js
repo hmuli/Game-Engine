@@ -9,10 +9,10 @@ class WorldSurface extends Component {
         ctx.translate(position.x, position.y)
 
         ctx.beginPath()
-        ctx.lineTo(0, window.innerHeight)
+        ctx.lineTo(0, 300)
         ctx.lineTo(0, 0)
-        ctx.lineTo(window.innerWidth, 0)
-        ctx.lineTo(window.innerWidth, window.innerHeight)
+        ctx.lineTo(3000, 0)
+        ctx.lineTo(3000, 300)
 
         ctx.fillStyle = "green"
         ctx.fill()

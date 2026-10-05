@@ -2,9 +2,9 @@ class Engine {
     // Static variables
     static canvas
     static ctx
-    static currentScene
+    static layers = ["default", "UI"]
 
-    static start() {
+    static start(nextScene, Settings) {
         // Select the canvas element
         Engine.canvas = document.querySelector("#canv")
 
@@ -14,13 +14,19 @@ class Engine {
         addEventListener("keydown", Input.keydown)
         addEventListener("keyup", Input.keyup)
 
-        Engine.currentScene.start()
+        SceneManager.nextScene = nextScene
+
+        if (Settings) {
+            Engine.layers = Settings.layers
+        }
 
         // Run the game loop when possible
         requestAnimationFrame(Engine.gameLoop)
     }
 
     static gameLoop() {
+        SceneManager.update()
+
         // Update and draw the screen
         Engine.update()
         Engine.draw()
@@ -32,7 +38,8 @@ class Engine {
     }
 
     static update() {
-        Engine.currentScene.update()
+        SceneManager.currentScene.start()
+        SceneManager.currentScene.update()
     }
 
     static draw() {
@@ -40,6 +47,6 @@ class Engine {
         Engine.canvas.width = window.innerWidth
         Engine.canvas.height = window.innerHeight
         
-        Engine.currentScene.draw(Engine.ctx)
+        SceneManager.currentScene.draw(Engine.ctx)
     }
 }

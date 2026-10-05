@@ -22,21 +22,24 @@
         <script src="../../engine/GameObject.js"></script>
         <script src="../../engine/Input.js"></script>
         <script src="../../engine/Scene.js"></script>
+        <script src="../../engine/SceneManager.js"></script>
         <script src="../../engine/Time.js"></script>
         <script src="../../engine/Vector2.js"></script>
+        <script src="../../engine/components/Camera.js"></script>
         <script src="../../engine/components/Polygon.js"></script>
+        <script src="../../engine/components/TextLabel.js"></script>
         <script src="../../engine/components/Transform.js"></script>
         
         <!-- Game code -->
+        <script src="Settings.js"></script>
         <script src="components/PlayerCharacter.js"></script>
         <script src="components/PlayerController.js"></script>
         <script src="components/WorldSurface.js"></script>
         <script src="gameObjects/PlayerObject.js"></script>
         <script src="gameObjects/WorldObject.js"></script>
-        <script src="scenes/MainScene.js"></script>
+        <script src="scenes/Level01.js"></script>
         <script>
-            Engine.currentScene = new MainScene()
-            Engine.start()
+            Engine.start(Level01, Settings)
         </script>
     </body>
 

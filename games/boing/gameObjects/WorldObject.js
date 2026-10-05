@@ -1,6 +1,6 @@
 class WorldObject extends GameObject {
     constructor() {
-        super("World")
+        super("World", ["World"], "world")
         this.addComponent(new WorldSurface())
     }
 }
