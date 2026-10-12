@@ -29,7 +29,7 @@ class GameObject {
     }
 
     start() {
-        for(const component of this.components.filter(c=>!c.didStart)) {
+        for (const component of this.components.filter(c=>!c.didStart)) {
             component.start?.()
             component.didStart = true
         }
@@ -42,9 +42,12 @@ class GameObject {
     }
 
     draw(ctx) {
-        for(const component of this.components) {
+        ctx.save()
+        ctx.setTransform(ctx.getTransform().multiply(this.transform.getWorldMatrix()))
+        for (const component of this.components) {
             component.draw?.(ctx)
         }
+        ctx.restore()
     }
 
     destroy() {

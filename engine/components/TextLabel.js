@@ -7,9 +7,9 @@ class TextLabel extends Component {
 
         ctx.save()
 
-        ctx.translate(position.x, position.y)
-        ctx.scale(this.transform.scale.x, this.transform.scale.y)
-        ctx.rotate(this.transform.rotation)
+        // ctx.translate(position.x, position.y)
+        // ctx.scale(this.transform.scale.x, this.transform.scale.y)
+        // ctx.rotate(this.transform.rotation)
 
         ctx.fillStyle = this.fillStyle
         ctx.fillText(this.text, 0, 0)

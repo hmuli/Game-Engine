@@ -1,3 +1,3 @@
 class Settings {
-    static layers = ["background", "world", "characters", "UI"]
+    static layers = ["background", "characters", "objects", "world", "UI"]
 }

@@ -27,10 +27,14 @@ class UpdateComponent extends Component {
             this.transform.position.y = this.transform.position.y + Time.deltaTime * this.speed
 
         // Laser code
-        if (this.timeSinceLastLaser > this.laserTime) {
-            this.timeSinceLastLaser = 0
+        if (Input.keysUpThisFrame.includes("Space"))
             instantiate(new LaserGameObject(), this.transform.position.clone())
-        }
+        
+        // Laser code
+        // if (this.timeSinceLastLaser > this.laserTime) {
+        //     this.timeSinceLastLaser = 0
+        //     instantiate(new LaserGameObject(), this.transform.position.clone())
+        // }
 
         Camera.main.transform.position = this.transform.position.clone()
     }

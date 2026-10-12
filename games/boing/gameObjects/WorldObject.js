@@ -1,6 +1,6 @@
 class WorldObject extends GameObject {
-    constructor() {
-        super("World", ["World"], "world")
-        this.addComponent(new WorldSurface())
+    constructor(points) {
+        super("World", ["Surface", "World"], "world")
+        this.addComponent(new Polygon(), {fillStyle: "green", points: points})
     }
 }
