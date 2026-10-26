@@ -3,7 +3,7 @@ class TextLabel extends Component {
     text = "[BLANK]"
 
     draw(ctx) {
-        let position = this.transform.position
+        // let position = this.transform.position
 
         ctx.save()
 

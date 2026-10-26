@@ -1,7 +1,9 @@
 class PlayerObject extends GameObject {
     constructor() {
         super("Player", [], "characters")
-        this.addComponent(new PlayerController()) // Input
+
+        // Input
+        this.addComponent(new PlayerController())
         
         // Body
         this.addComponent(new Polygon(), {fillStyle: "rgb(0, 80, 255)", points: [
@@ -53,5 +55,8 @@ class PlayerObject extends GameObject {
             new Vector2(80, 20),
             new Vector2(80, 0),
         ]})
+
+        // Collision
+        this.addComponent(new Collider())
     }
 }

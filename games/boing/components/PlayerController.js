@@ -21,6 +21,10 @@ class PlayerController extends Component {
     jumping = false
     onGround = false
 
+    onCollisionStay(object) {
+        this.onGround = true
+    }
+
     update() {
 
         // Movement
@@ -65,6 +69,7 @@ class PlayerController extends Component {
             if (this.jumping) {
                 this.canJump = false
                 this.jumping = false
+                this.onGround = false
                 this.velocity = this.baseJumpPower
                 this.transform.position.y = this.transform.position.y - this.playerSize - 1
                 console.log(this.velocity)
@@ -85,20 +90,20 @@ class PlayerController extends Component {
         }
 
         // Collision implementation
-        let surfaces = GameObject.findGameObjectsWithTag("Surface")
-        for (const surface of surfaces) {
-            let worldPos = surface.transform.position
-            let playerPos = new Vector2(this.transform.position.x, this.transform.position.y)
+        // let surfaces = GameObject.findGameObjectsWithTag("Surface")
+        // for (const surface of surfaces) {
+        //     let worldPos = surface.transform.position
+        //     let playerPos = new Vector2(this.transform.position.x, this.transform.position.y)
         
-            // Ensure that the player does not fall through solid ground
-            if (playerPos.y < worldPos.y - this.playerSize) {
-                this.onGround = false
-            } else {
-                this.onGround = true
-                this.transform.position.y = worldPos.y - this.playerSize
-            }
+        //     // Ensure that the player does not fall through solid ground
+        //     if (playerPos.y < worldPos.y - this.playerSize) {
+        //         this.onGround = false
+        //     } else {
+        //         this.onGround = true
+        //         this.transform.position.y = worldPos.y - this.playerSize
+        //     }
         
-        }
+        // }
 
         // Make the player slide before they come to a complete stop horizontally
         if (!this.running && !(this.runDirection == "none")) {

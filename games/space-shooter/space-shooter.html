@@ -25,7 +25,10 @@
         <script src="../../engine/SceneManager.js"></script>
         <script src="../../engine/Time.js"></script>
         <script src="../../engine/Vector2.js"></script>
+        <script src="../../engine/Collisions.js"></script>
         <script src="../../engine/components/Camera.js"></script>
+        <script src="../../engine/components/Collider.js"></script>
+        <script src="../../engine/components/MultiLineTextLabel.js"></script>
         <script src="../../engine/components/Polygon.js"></script>
         <script src="../../engine/components/TextLabel.js"></script>
         <script src="../../engine/components/Transform.js"></script>
@@ -40,6 +43,7 @@
         <script src="components/LaserController.js"></script>
         <script src="components/LevelController.js"></script>
         <script src="components/PointsController.js"></script>
+        <script src="components/SceneTimerController.js"></script>
         <script src="components/UpdateComponent.js"></script>
         
         <script src="gameObjects/EnemyGameObject.js"></script>
@@ -54,6 +58,33 @@
         <script src="scenes/Level02.js"></script>
         <script>
             Engine.start(Level01, Settings)
+
+            // Tests
+            let gameObject = new GameObject()
+            gameObject.addComponent(new Polygon(), {points: [
+                new Vector2(0, -1),
+                new Vector2(-1, 1),
+                new Vector2(1, 1),
+            ]})
+
+            let gameObjectTwo = new GameObject()
+            gameObjectTwo.addComponent(new Polygon(), {points: [
+                new Vector2(0, -1),
+                new Vector2(-1, 1),
+                new Vector2(1, 1),
+            ]})
+
+            console.assert(Collisions.isCollisionPointPolygon(new Vector2(0, 0), gameObject))
+            console.assert(Collisions.isCollisionPointPolygon(new Vector2(0, 0.99999), gameObject))
+
+            console.assert(!Collisions.isCollisionPointPolygon(new Vector2(10000, 10000), gameObject))
+            console.assert(!Collisions.isCollisionPointPolygon(new Vector2(0, 1.1), gameObject))
+            console.assert(!Collisions.isCollisionPointPolygon(new Vector2(0, -1.1), gameObject))
+            console.assert(!Collisions.isCollisionPointPolygon(new Vector2(0, -1.0001), gameObject))
+
+            console.assert(Collisions.isCollisionPolygonPolygon(gameObject, gameObjectTwo))
+            gameObjectTwo.transform.position = new Vector2(1000, 1000)
+            console.assert(!Collisions.isCollisionPolygonPolygon(gameObject, gameObjectTwo))
         </script>
     </body>
 

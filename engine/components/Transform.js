@@ -11,8 +11,8 @@ class Transform extends Component {
     getLocalMatrix() {
         let matrix = new DOMMatrix
         matrix.translateSelf(this.position.x, this.position.y)
-        matrix.scaleSelf(this.scale.x, this.scale.y)
         matrix.rotateSelf(this.rotation * 180 / Math.PI)
+        matrix.scaleSelf(this.scale.x, this.scale.y)
         return matrix
     }
 

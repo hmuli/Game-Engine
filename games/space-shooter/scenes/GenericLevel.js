@@ -8,5 +8,14 @@ class GenericLevel extends Scene {
         let helperGameObject = this.instantiate(new HelperGameObject(), new Vector2(80, 100))
 
         helperGameObject.transform.setParent(mainGameObject.transform)
+
+        let sceneTimer = new GameObject("SceneTimer", [], "UI")
+        sceneTimer.addComponent(new TextLabel(), {fillStyle: "gray"})
+        sceneTimer.addComponent(new SceneTimerController())
+        this.instantiate(sceneTimer, new Vector2(0, 50))
+        
+        let wrappedText = new GameObject("Wrapper", [], "UI")
+        wrappedText.addComponent(new MultiLineTextLabel(), {fillStyle: "gray", text: "We the People of the United States, in order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America."})
+        this.instantiate(wrappedText, new Vector2(0, 100))
     }
 }

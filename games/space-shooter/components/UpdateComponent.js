@@ -27,15 +27,29 @@ class UpdateComponent extends Component {
             this.transform.position.y = this.transform.position.y + Time.deltaTime * this.speed
 
         // Laser code
-        if (Input.keysUpThisFrame.includes("Space"))
-            instantiate(new LaserGameObject(), this.transform.position.clone())
+        // if (Input.keysUpThisFrame.includes("Space"))
+        //     instantiate(new LaserGameObject(), this.transform.position.clone())
         
         // Laser code
         // if (this.timeSinceLastLaser > this.laserTime) {
         //     this.timeSinceLastLaser = 0
         //     instantiate(new LaserGameObject(), this.transform.position.clone())
         // }
-
         Camera.main.transform.position = this.transform.position.clone()
+        // Camera.main.transform.scale = new Vector2(1/2, 1/2)
+        
+        // const enemies = GameObject.findGameObjectsWithTag("Enemy")
+        // for (const enemy of enemies) {
+        //     if (Collisions.isCollisionPolygonPolygon(this.gameObject, enemy)) {
+        //         console.log("Collision")
+        //     }
+        // }
+    }
+
+    onCollisionStay(other) {
+        console.log(other)
+    }
+    onMouseOver() {
+        console.log("Mouse Over")
     }
 }

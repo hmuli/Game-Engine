@@ -7,6 +7,21 @@ class Input {
     static mouseButtonsDownThisFrame = []
     static mouseButtonsUpThisFrame = []
 
+    static mousePosition
+    static mousePositionLastFrame
+    static mouseDelta
+
+    static mousemove(event) {
+        if (Input.mousePosition) {
+            Input.mousePositionLastFrame = Input.mousePosition
+        }
+        Input.mousePosition = new Vector2(event.clientX, event.clientY)
+        
+        if (Input.mousePositionLastFrame) {
+            Input.mouseDelta = Input.mousePosition.minus(Input.mousePositionLastFrame)
+        }
+    }
+
     static mousedown(event) {
         if (!Input.mouseButtonsDown.includes(event.code)) {
             Input.mouseButtonsDown.push(event.code)

@@ -4,5 +4,6 @@ class MainGameObject extends GameObject {
         this.addComponent(new UpdateComponent())
         this.addComponent(new Polygon(), {fillStyle: "blue", points:Assets.triangle})
         this.transform.scale = new Vector2(2)
+        this.addComponent(new Collider(), {points: Assets.triangle})
     }
 }

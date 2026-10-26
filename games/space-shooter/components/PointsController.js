@@ -4,6 +4,6 @@ class PointsController extends Component {
     }
 
     updatePoints(delta) {
-        Globals.points+=delta
+        Globals.points += delta
     }
 }

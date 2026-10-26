@@ -15,6 +15,7 @@ class Engine {
         addEventListener("keyup", Input.keyup)
         addEventListener("mousedown", Input.keydown)
         addEventListener("mouseup", Input.keyup)
+        addEventListener("mousemove", Input.mousemove)
 
         SceneManager.nextScene = nextScene
 
