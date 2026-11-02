@@ -3,6 +3,7 @@ class PlayerObject extends GameObject {
         super("Player", [], "characters")
 
         // Input
+        this.addComponent(new RigidBody(), {gravity: 400})
         this.addComponent(new PlayerController())
         
         // Body

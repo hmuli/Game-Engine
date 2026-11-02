@@ -36,7 +36,7 @@ class GameObject {
     }
 
     update() {
-        for(const component of this.components) {
+        for (const component of this.components) {
             component.update?.()
         }
     }

@@ -20,9 +20,16 @@ class PlayerController extends Component {
     canJump = false
     jumping = false
     onGround = false
+    groundPos = 0
 
-    onCollisionStay(object) {
-        this.onGround = true
+    onCollisionStay(collidable) {
+        // if (collidable.transform.position.y > this.transform.position.y) {
+        //     // Let the updater know that we are colliding with the ground
+        //     this.onGround = true
+        // }
+
+        this.gameObject.getComponent(RigidBody).velocity.y = 0
+        this.canJump = true
     }
 
     update() {
@@ -58,36 +65,38 @@ class PlayerController extends Component {
         if (Input.keysDown.includes("ArrowUp")) {
             // Trigger a jump
             if (this.canJump)
-                this.jumping = true
+                this.canJump = false
         }
 
         // Gravity implementation
-        if (this.onGround) {
-            // We're touching the ground, move on to jump logic
-            this.canJump = true
+        // if (this.onGround) {
+        //     // We're touching the ground, enable jump logic
+        //     this.canJump = true
 
-            if (this.jumping) {
-                this.canJump = false
-                this.jumping = false
-                this.onGround = false
-                this.velocity = this.baseJumpPower
-                this.transform.position.y = this.transform.position.y - this.playerSize - 1
-                console.log(this.velocity)
-            } else {
-                this.velocity = 0
-            }
-        } else {
-            // We're falling, apply gravity
-            if (Math.abs(this.velocity) < this.baseFallSpeed) {
-                this.velocity = this.baseFallSpeed
-            }
-            // console.log(this.velocity)
+        //     if (this.jumping) {
+        //         this.canJump = false
+        //         this.jumping = false
+        //         this.velocity = this.baseJumpPower
+        //         this.transform.position.y = this.transform.position.y - this.playerSize - 1
+        //         console.log(this.velocity)
+        //     } else {
+        //         this.velocity = 0
+        //     }
+        // } else {
+        //     // We're falling, apply gravity
+        //     if (Math.abs(this.velocity) < this.baseFallSpeed) {
+        //         this.velocity = this.baseFallSpeed
+        //     }
+        //     // console.log(this.velocity)
             
-            if (this.velocity < this.maxFallSpeed)
-                this.velocity = this.velocity + Math.abs(this.velocity) * this.gravity
+        //     if (this.velocity < this.maxFallSpeed)
+        //         this.velocity = this.velocity + Math.abs(this.velocity) * this.gravity
 
-            this.transform.position.y = this.transform.position.y + Time.deltaTime * this.velocity
-        }
+        //     this.transform.position.y = this.transform.position.y + Time.deltaTime * this.velocity
+        // }
+
+        // Reset the ground state
+        this.onGround = false
 
         // Collision implementation
         // let surfaces = GameObject.findGameObjectsWithTag("Surface")
