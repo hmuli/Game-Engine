@@ -1,6 +1,9 @@
 class TextLabel extends Component {
     fillStyle = "black"
     text = "[BLANK]"
+    font = "10px Arial"
+    textAlign = "left"
+    textBaseline = "alphabetic"
 
     draw(ctx) {
         // let position = this.transform.position

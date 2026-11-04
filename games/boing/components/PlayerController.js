@@ -64,8 +64,11 @@ class PlayerController extends Component {
         // Jump implementation
         if (Input.keysDown.includes("ArrowUp")) {
             // Trigger a jump
-            if (this.canJump)
+            if (this.canJump) {
                 this.canJump = false
+                this.gameObject.getComponent(RigidBody).velocity.y = -300
+                this.transform.position.y -= 1
+            }
         }
 
         // Gravity implementation
