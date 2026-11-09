@@ -1,4 +1,6 @@
 class Collider extends Component {
+    isTrigger = false
+
     _points
     get points() {
         // Use points when provided, otherwise default to untouched polygon points
