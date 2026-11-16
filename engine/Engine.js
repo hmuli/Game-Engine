@@ -3,8 +3,12 @@ class Engine {
     static canvas
     static ctx
     static layers = ["default", "UI"]
+    static aspectRatio
+    static cameraWidthInWorldSpace
+    static letterBoxingWidth = 0
+    static letterBoxingHeight = 0 
 
-    static start(nextScene, Settings) {
+    static start(nextScene, settings) {
         // Select the canvas element
         Engine.canvas = document.querySelector("#canv")
 
@@ -16,11 +20,14 @@ class Engine {
         addEventListener("mousedown", Input.keydown)
         addEventListener("mouseup", Input.keyup)
         addEventListener("mousemove", Input.mousemove)
+        addEventListener("contextmenu", e=>e.preventDefault())
 
         SceneManager.nextScene = nextScene
 
-        if (Settings) {
-            Engine.layers = Settings.layers
+        if (settings) {
+            Engine.layers = settings.layers
+            Engine.aspectRatio = settings.aspectRatio
+            Engine.cameraWidthInWorldSpace = settings.cameraWidthInWorldSpace
         }
 
         // Run the game loop when possible
@@ -49,7 +56,7 @@ class Engine {
         // Update screen size to match browser window
         Engine.canvas.width = window.innerWidth
         Engine.canvas.height = window.innerHeight
-        
+
         SceneManager.currentScene.draw(Engine.ctx)
     }
 }
