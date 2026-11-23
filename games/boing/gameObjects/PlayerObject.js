@@ -2,7 +2,7 @@ class PlayerObject extends GameObject {
     constructor() {
         super("Player", [], "characters")
 
-        // Input
+        // Movement
         this.addComponent(new RigidBody(), {gravity: 400})
         this.addComponent(new PlayerController())
         

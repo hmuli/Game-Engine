@@ -82,13 +82,13 @@ class Level01 extends Scene {
         ]
         this.instantiate(new SurfaceObject(points), new Vector2(2000, -100))
 
-        // Obstacle 6
+        // Obstacle 8
         points = [
             new Vector2(0, -900),
             new Vector2(0, 0),
             new Vector2(200, 0),
             new Vector2(200, -900),
         ]
-        this.instantiate(new SurfaceObject(points), new Vector2(2500, 0))
+        this.instantiate(new SurfaceObject(points), new Vector2(2400, 0))
     }
 }

@@ -42,7 +42,40 @@ class GameObject {
     }
 
     draw(ctx) {
+
         ctx.save()
+        if (this.transform instanceof RectTransform) {
+            if (!this.transform.useLetterBoxing) {
+                const width = Engine.canvas.width
+                const height = Engine.canvas.height
+
+                const upperLeft = new Vector2(
+                    width * this.transform.anchorMin.x + this.transform.offsetUpperLeft.x,
+                    height * this.transform.anchorMin.y + this.transform.offsetUpperLeft.y
+                )
+                const lowerRight = new Vector2(
+                    width * this.transform.anchorMin.x + this.transform.offsetLowerLeft.x,
+                    height * this.transform.anchorMin.y + this.transform.offsetLowerLeft.y
+                )
+                this.transform.position = new Vector2((upperLeft.x + lowerRight.x) / 2, (upperLeft.y + lowerRight.y) / 2)
+                this.transform.scale = new Vector2((lowerRight.x - upperLeft.x) / 2, (lowerRight.y - upperLeft.y) / 2)
+            } else {
+                const width = Engine.canvas.width - Engine.letterBoxingWidth
+                const height = Engine.canvas.height - Engine.letterBoxingHeight
+
+                const upperLeft = new Vector2(
+                    width * this.transform.anchorMin.x + this.transform.offsetUpperLeft.x,
+                    height * this.transform.anchorMin.y + this.transform.offsetUpperLeft.y
+                )
+                const lowerRight = new Vector2(
+                    width * this.transform.anchorMin.x + this.transform.offsetLowerLeft.x,
+                    height * this.transform.anchorMin.y + this.transform.offsetLowerLeft.y
+                )
+                this.transform.position = new Vector2(Engine.letterBoxingWidth / 2 + (upperLeft.x + lowerRight.x) / 2, (upperLeft.y + lowerRight.y) / 2)
+                this.transform.scale = new Vector2(Engine.letterBoxingHeight / 2 + (lowerRight.x - upperLeft.x) / 2, (lowerRight.y - upperLeft.y) / 2)
+            }
+        }
+
         ctx.setTransform(ctx.getTransform().multiply(this.transform.getWorldMatrix()))
         for (const component of this.components) {
             component.draw?.(ctx)

@@ -3,10 +3,12 @@ class Engine {
     static canvas
     static ctx
     static layers = ["default", "UI"]
+    static collisionLayers = []
     static aspectRatio
     static cameraWidthInWorldSpace
     static letterBoxingWidth = 0
-    static letterBoxingHeight = 0 
+    static letterBoxingHeight = 0
+    static lastTimeStep
 
     static start(nextScene, settings) {
         // Select the canvas element
@@ -28,13 +30,25 @@ class Engine {
             Engine.layers = settings.layers
             Engine.aspectRatio = settings.aspectRatio
             Engine.cameraWidthInWorldSpace = settings.cameraWidthInWorldSpace
+            
+            if (Engine.collisionLayers) {
+                
+            }
         }
 
         // Run the game loop when possible
         requestAnimationFrame(Engine.gameLoop)
     }
 
-    static gameLoop() {
+    static gameLoop(timestamp) {
+        if (!Engine.lastTimeStep) {
+            Engine.lastTimeStep = timestamp
+        } else {
+            const diffInMilliseconds = timestamp = Engine.lastTimeStep
+            const diffInSeconds = diffInMilliseconds / 1000
+            Time.deltaTime = Math.min(diffInSeconds, 1/60)
+            Engine.lastTimeStep = timestamp
+        }
         SceneManager.update()
 
         // Update and draw the screen

@@ -8,6 +8,8 @@ class Polygon extends Component {
 
         ctx.save()
 
+        ctx.globalAlpha = this.alpha
+
         // ctx.translate(position.x, position.y)
         // ctx.scale(this.transform.scale.x, this.transform.scale.y)
         // ctx.rotate(this.transform.rotation)

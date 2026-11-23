@@ -38,9 +38,9 @@ class Scene {
             let matrix = new DOMMatrix()
             matrix.translateSelf(Engine.canvas.width/2, Engine.canvas.height/2)
 
-            if (Engine.cameraWidthWorldSpace) {
+            if (Engine.cameraWidthInWorldSpace) {
                 const scalar = Engine.cameraWidthInWorldSpace / (Engine.canvas.width - Engine.letterBoxingWidth)
-                ctx.scale(1/scalar, 1/scalar)
+                matrix.scaleSelf(1/scalar, 1/scalar)
             }
 
             matrix.multiplySelf(Camera.main.transform.getWorldMatrix().inverse())
@@ -62,12 +62,17 @@ class Scene {
                 const one = collidable[i]
                 const two = collidable[j]
 
+                // Continue if not in collision layers list
+                if (Engine.collisionLayers > 0 && !Engine.collisionLayers.some(pair=>(pair[0] == one.layer && pair[1] == two.layer) || pair[0] == two.layer && pair[1] == one.layer))
+                    continue
+
                 if (!one.getComponent(RigidBody) && !two.getComponent(RigidBody))
                     continue
 
                 const minimumTransformVector = Collisions.isCollisionPolygonPolygon(collidable[i], collidable[j])
                 if (minimumTransformVector) {
                     if (!one.getComponent(Collider).isTrigger && !two.getComponent(Collider).isTrigger) {
+                        // console.log(collidable[j])
                         collidable[i].broadcastMessage("onCollisionStay", [collidable[j], minimumTransformVector])
                         collidable[j].broadcastMessage("onCollisionStay", [collidable[i], minimumTransformVector.scaled(-1)])
                         physicalCollisions.push({one: collidable[i], two: collidable[j], minimumTransformVector})
@@ -86,6 +91,7 @@ class Scene {
             }
 
             if (physicalCollision.two.getComponent(RigidBody)) {
+                console.log(physicalCollision.two)
                 physicalCollision.two.transform.position.plusEquals(physicalCollision.minimumTransformVector.scaled(-1))
             }
         }
@@ -116,7 +122,7 @@ class Scene {
                 Engine.letterBoxingHeight = Engine.canvas.height - maxHeight
             } else {
                 const maxWidth = Engine.aspectRatio * Engine.canvas.height
-                Engine.letterBoxingWitdh = Engine.canvas.width - maxWidth
+                Engine.letterBoxingWidth = Engine.canvas.width - maxWidth
             }
         }
 
@@ -124,7 +130,7 @@ class Scene {
         ctx.save()
         ctx.translate(Engine.canvas.width / 2, Engine.canvas.height / 2)
         
-        if (Engine.cameraWidthWorldSpace) {
+        if (Engine.cameraWidthInWorldSpace) {
             const scalar = Engine.cameraWidthInWorldSpace / (Engine.canvas.width - Engine.letterBoxingWidth)
             ctx.scale(1/scalar, 1/scalar)
         }
